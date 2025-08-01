@@ -444,15 +444,17 @@
 <body class="text-[var(--text-primary)]" data-theme="dark">
   <div id="main-content" class="">
   <!-- Navbar -->
-  <nav class="max-w-6xl mx-auto mt-4 mb-8 rounded-2xl section-bg px-6 py-3 flex items-center justify-between shadow-lg animate-fade-up">
-    <span class="text-2xl font-bold gradient-text">NEXRIFT</span>
-    <div class="flex items-center space-x-8">
+  <nav class="max-w-6xl mx-auto mt-4 mb-8 rounded-2xl section-bg px-4 md:px-6 py-3 flex items-center justify-between shadow-lg animate-fade-up">
+    <span class="text-xl md:text-2xl font-bold gradient-text">NEXRIFT</span>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-8">
       <ul class="flex space-x-8 text-[var(--text-primary)] text-base font-normal">
-      <li><a href="#home" class="hover:underline">Home</a></li>
-      <li><a href="#about" class="hover:underline">About Us</a></li>
-      <li><a href="#services" class="hover:underline">Services</a></li>
-      <li><a href="#contact" class="hover:underline">Contact Us</a></li>
-    </ul>
+        <li><a href="#home" class="hover:underline">Home</a></li>
+        <li><a href="#about" class="hover:underline">About Us</a></li>
+        <li><a href="#services" class="hover:underline">Services</a></li>
+        <li><a href="#contact" class="hover:underline">Contact Us</a></li>
+      </ul>
       <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
         <svg id="sun-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -462,22 +464,61 @@
         </svg>
       </button>
     </div>
+    
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden flex items-center space-x-4">
+      <button id="theme-toggle-mobile" class="theme-toggle" title="Toggle theme">
+        <svg id="sun-icon-mobile" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <svg id="moon-icon-mobile" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+      <button id="mobile-menu-btn" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
   </nav>
+  
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div class="absolute top-0 right-0 h-full w-64 bg-[var(--bg-secondary)] shadow-lg transform translate-x-full transition-transform duration-300">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-8">
+          <span class="text-xl font-bold gradient-text">NEXRIFT</span>
+          <button id="close-menu-btn" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)]">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <ul class="space-y-6 text-[var(--text-primary)] text-lg">
+          <li><a href="#home" class="block py-2 hover:text-[var(--gradient-start)] transition-colors" onclick="closeMobileMenu()">Home</a></li>
+          <li><a href="#about" class="block py-2 hover:text-[var(--gradient-start)] transition-colors" onclick="closeMobileMenu()">About Us</a></li>
+          <li><a href="#services" class="block py-2 hover:text-[var(--gradient-start)] transition-colors" onclick="closeMobileMenu()">Services</a></li>
+          <li><a href="#contact" class="block py-2 hover:text-[var(--gradient-start)] transition-colors" onclick="closeMobileMenu()">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section id="home" class="relative flex flex-col items-center justify-center min-h-[60vh] rounded-xl-2 max-w-6xl mx-auto overflow-hidden mb-12 animate-fade-up hero-bg">
     <div class="absolute inset-0 bg-[var(--bg-primary)] opacity-80"></div>
-    <div class="relative z-10 flex flex-col items-center justify-center py-20 px-4">
-      <h1 class="text-4xl md:text-6xl font-bold text-center mb-6 gradient-text typewriter">Building Next-Gen Tech Solutions</h1>
-      <p class="text-lg md:text-xl text-[var(--text-secondary)] text-center mb-8 max-w-2xl">NexRIFT is a forward-thinking technology services startup dedicated to crafting innovative solutions that propel businesses into the future.</p>
-      <a href="#contact" class="gradient-btn btn-animate text-white font-medium px-6 py-2 rounded-md text-lg shadow transition">Get Started</a>
+    <div class="relative z-10 flex flex-col items-center justify-center py-12 md:py-20 px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-4 md:mb-6 gradient-text typewriter">Building Next-Gen Tech Solutions</h1>
+      <p class="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] text-center mb-6 md:mb-8 max-w-2xl px-4">NexRIFT is a forward-thinking technology services startup dedicated to crafting innovative solutions that propel businesses into the future.</p>
+      <a href="#contact" class="gradient-btn btn-animate text-white font-medium px-4 md:px-6 py-2 rounded-md text-base md:text-lg shadow transition">Get Started</a>
     </div>
   </section>
 
   <!-- About Us Section -->
-  <section id="about" class="max-w-5xl mx-auto py-16 px-4 animate-fade-up">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 gradient-text animate-fade-up">About Us</h2>
-    <p class="text-center text-[var(--text-secondary)] max-w-3xl mx-auto mb-12 text-base md:text-lg animate-fade-up">
+  <section id="about" class="max-w-5xl mx-auto py-8 md:py-16 px-4 animate-fade-up">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 md:mb-6 gradient-text animate-fade-up">About Us</h2>
+    <p class="text-center text-[var(--text-secondary)] max-w-3xl mx-auto mb-8 md:mb-12 text-sm md:text-base lg:text-lg animate-fade-up px-4">
       At NexRIFT, our mission is to empower businesses with cutting-edge technology solutions that drive growth and efficiency. We envision a future where technology seamlessly integrates with business operations, enhancing productivity and fostering innovation. Our journey began with a shared passion for technology and a commitment to delivering exceptional service, evolving into a trusted partner for businesses seeking to leverage technology for competitive advantage.
     </p>
     <!-- Timeline -->
@@ -518,12 +559,12 @@
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="py-16 section-bg animate-fade-up">
+  <section id="services" class="py-8 md:py-16 section-bg animate-fade-up">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 gradient-text animate-fade-up">Our Services</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
-          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-10 gradient-text animate-fade-up">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div class="card-animate rounded-xl shadow-md p-6 md:p-8 flex flex-col items-center animate-fade-up">
+          <svg width="60" height="60" class="md:w-20 md:h-20" fill="none" stroke="url(#icon-gradient)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
             <defs>
               <linearGradient id="icon-gradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="var(--gradient-start)"/>
@@ -533,11 +574,11 @@
             <circle cx="24" cy="40" r="16"/>
             <rect x="32" y="16" width="16" height="16" rx="2"/>
           </svg>
-          <div class="font-bold text-xl mb-2 text-center gradient-text">AI Solutions</div>
-          <div class="text-[var(--text-secondary)] text-center">Harness the power of artificial intelligence to automate processes, gain insights, and drive innovation.</div>
+          <div class="font-bold text-lg md:text-xl mb-2 text-center gradient-text">AI Solutions</div>
+          <div class="text-[var(--text-secondary)] text-center text-sm md:text-base">Harness the power of artificial intelligence to automate processes, gain insights, and drive innovation.</div>
         </div>
-        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
-          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient2)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+        <div class="card-animate rounded-xl shadow-md p-6 md:p-8 flex flex-col items-center animate-fade-up">
+          <svg width="60" height="60" class="md:w-20 md:h-20" fill="none" stroke="url(#icon-gradient2)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
             <defs>
               <linearGradient id="icon-gradient2" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="var(--gradient-start)"/>
@@ -547,11 +588,11 @@
             <path d="M16 48c0-8.837 7.163-16 16-16s16 7.163 16 16"/>
             <path d="M32 32V16a8 8 0 1 1 16 0v8"/>
           </svg>
-          <div class="font-bold text-xl mb-2 text-center gradient-text">Cloud Computing</div>
-          <div class="text-[var(--text-secondary)] text-center">Migrate to the cloud for enhanced scalability, security, and cost-effectiveness.</div>
+          <div class="font-bold text-lg md:text-xl mb-2 text-center gradient-text">Cloud Computing</div>
+          <div class="text-[var(--text-secondary)] text-center text-sm md:text-base">Migrate to the cloud for enhanced scalability, security, and cost-effectiveness.</div>
         </div>
-        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
-          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient3)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+        <div class="card-animate rounded-xl shadow-md p-6 md:p-8 flex flex-col items-center animate-fade-up">
+          <svg width="60" height="60" class="md:w-20 md:h-20" fill="none" stroke="url(#icon-gradient3)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
             <defs>
               <linearGradient id="icon-gradient3" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="var(--gradient-start)"/>
@@ -561,18 +602,18 @@
             <path d="M32 56c13.255 0 24-10.745 24-24S45.255 8 32 8 8 18.745 8 32s10.745 24 24 24z"/>
             <path d="M24 32l8 8 8-12"/>
           </svg>
-          <div class="font-bold text-xl mb-2 text-center gradient-text">Cybersecurity</div>
-          <div class="text-[var(--text-secondary)] text-center">Protect your business from cyber threats with our comprehensive security solutions.</div>
+          <div class="font-bold text-lg md:text-xl mb-2 text-center gradient-text">Cybersecurity</div>
+          <div class="text-[var(--text-secondary)] text-center text-sm md:text-base">Protect your business from cyber threats with our comprehensive security solutions.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Us Section -->
-  <section id="contact" class="py-16 section-bg animate-fade-up">
+  <section id="contact" class="py-8 md:py-16 section-bg animate-fade-up">
     <div class="max-w-2xl mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 gradient-text animate-fade-up">Contact Us</h2>
-      <div class="card-animate rounded-xl shadow-md p-8 animate-fade-up">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 gradient-text animate-fade-up">Contact Us</h2>
+      <div class="card-animate rounded-xl shadow-md p-6 md:p-8 animate-fade-up">
         <form class="space-y-6">
           <div class="animate-fade-up">
             <label for="name" class="block text-[var(--text-secondary)] font-semibold mb-1">Your Name</label>
@@ -595,14 +636,14 @@
   </section>
 
   <!-- Footer -->
-  <footer class="section-bg text-[var(--text-primary)] mt-12 py-8 animate-fade-up">
+  <footer class="section-bg text-[var(--text-primary)] mt-8 md:mt-12 py-6 md:py-8 animate-fade-up">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
       <div class="flex items-center space-x-4 mb-4 md:mb-0">
-        <span class="text-2xl font-bold gradient-text">NEXRIFT</span>
-        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2" /><rect width="6" height="6" x="9" y="2" rx="1"/></svg></a>
-        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1-12 0" /><circle cx="12" cy="12" r="10"/></svg></a>
+        <span class="text-xl md:text-2xl font-bold gradient-text">NEXRIFT</span>
+        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-lg md:text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2" /><rect width="6" height="6" x="9" y="2" rx="1"/></svg></a>
+        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-lg md:text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1-12 0" /><circle cx="12" cy="12" r="10"/></svg></a>
       </div>
-      <div class="flex space-x-8 text-[var(--text-muted)] text-sm">
+      <div class="flex space-x-4 md:space-x-8 text-[var(--text-muted)] text-xs md:text-sm">
         <a href="#" class="hover:text-[var(--text-primary)]">Privacy Policy</a>
         <a href="#" class="hover:text-[var(--text-primary)]">Terms of Service</a>
       </div>
@@ -622,8 +663,11 @@
     // Theme toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
       const themeToggle = document.getElementById('theme-toggle');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
       const sunIcon = document.getElementById('sun-icon');
       const moonIcon = document.getElementById('moon-icon');
+      const sunIconMobile = document.getElementById('sun-icon-mobile');
+      const moonIconMobile = document.getElementById('moon-icon-mobile');
       const body = document.body;
       
       // Check for saved theme preference or default to dark
@@ -631,23 +675,34 @@
       body.setAttribute('data-theme', currentTheme);
       updateThemeIcon(currentTheme);
       
-      themeToggle.addEventListener('click', function() {
+      function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+          sunIconMobile.classList.remove('hidden');
+          moonIconMobile.classList.add('hidden');
+        } else {
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+          sunIconMobile.classList.add('hidden');
+          moonIconMobile.classList.remove('hidden');
+        }
+      }
+      
+      function toggleTheme() {
         const currentTheme = body.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
         body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
-      });
+      }
       
-      function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-          sunIcon.classList.remove('hidden');
-          moonIcon.classList.add('hidden');
-        } else {
-          sunIcon.classList.add('hidden');
-          moonIcon.classList.remove('hidden');
-        }
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
+      if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleTheme);
       }
     });
 
@@ -665,6 +720,52 @@
         observer.observe(el);
       });
     });
+    
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+      const mobileMenuOverlay = mobileMenu.querySelector('div');
+      
+      function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        setTimeout(() => {
+          mobileMenuOverlay.classList.remove('translate-x-full');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeMobileMenu() {
+        mobileMenuOverlay.classList.add('translate-x-full');
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+        }, 300);
+        document.body.style.overflow = '';
+      }
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+      }
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+      }
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', function(e) {
+          if (e.target === mobileMenu) {
+            closeMobileMenu();
+          }
+        });
+      }
+      
+      // Close menu on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          closeMobileMenu();
+        }
+      });
+    });
+    
     // Contact form AJAX submit and thank you message
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.querySelector('form');
