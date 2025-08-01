@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexRIFT - Modern Tech Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Dark mode colors */
+      --bg-primary: #0a1120;
+      --bg-secondary: #101828;
+      --bg-tertiary: #1a2a3a;
+      --text-primary: #ffffff;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --border-primary: #2edbff;
+      --border-secondary: #1de9b6;
+      --gradient-start: #2edbff;
+      --gradient-end: #1de9b6;
+      --card-bg: #101828;
+      --timeline-bg: #101828;
+      --input-bg: #101828;
+      --shadow-color: rgba(29, 233, 182, 0.1);
+    }
+
+    [data-theme="light"] {
+      /* Light mode colors */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #063970;
+      --text-secondary: #1e293b;
+      --text-muted: #64748b;
+      --border-primary: #063970;
+      --border-secondary: #1e40af;
+      --gradient-start: #063970;
+      --gradient-end: #1e40af;
+      --card-bg: #ffffff;
+      --timeline-bg: #ffffff;
+      --input-bg: #ffffff;
+      --shadow-color: rgba(6, 57, 112, 0.1);
+      --accent-blue: #1e3a8a;
+      --accent-indigo: #1e40af;
+      --accent-purple: #3730a3;
+      --accent-teal: #0f766e;
+      --accent-emerald: #065f46;
+      --accent-amber: #92400e;
+      --accent-orange: #9a3412;
+      --accent-red: #991b1b;
+      --accent-pink: #be185d;
+      --accent-rose: #be123c;
+    }
+
+    [data-theme="light"] {
+      --bg-secondary: #f0f4f8;
+      --bg-tertiary: #e2e8f0;
+      --card-bg: #ffffff;
+      --timeline-bg: #f8fafc;
+      --shadow-color: rgba(30, 58, 138, 0.15);
+    }
+
+    [data-theme="light"] .card-animate {
+      border: 1px solid #e2e8f0;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    [data-theme="light"] .card-animate:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 12px 32px 0 rgba(30, 58, 138, 0.2);
+    }
+
+    [data-theme="light"] .timeline-card {
+      border-left-color: var(--accent-blue);
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    [data-theme="light"] .timeline-dot {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
+      border-color: #ffffff;
+    }
+
+    [data-theme="light"] .input-field {
+      border-color: #cbd5e1;
+      background: #ffffff;
+    }
+
+    [data-theme="light"] .input-field:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    [data-theme="light"] .gradient-text {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 50%, var(--accent-teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .icon-pulse {
+      animation: iconPulseLight 1.8s infinite alternate;
+    }
+
+    @keyframes iconPulseLight {
+      0% { filter: drop-shadow(0 0 0 var(--accent-blue)); }
+      100% { filter: drop-shadow(0 0 16px var(--accent-indigo)); }
+    }
+
+    [data-theme="light"] .theme-toggle {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+      background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-teal) 100%);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+    }
+
+    [data-theme="light"] svg stop:first-child {
+      stop-color: var(--accent-blue);
+    }
+
+    [data-theme="light"] svg stop:last-child {
+      stop-color: var(--accent-purple);
+    }
+
+    [data-theme="light"] #icon-gradient2 stop:last-child {
+      stop-color: var(--accent-teal);
+    }
+
+    [data-theme="light"] #icon-gradient3 stop:last-child {
+      stop-color: var(--accent-emerald);
+    }
+
+    body { 
+      font-family: 'Inter', 'ui-sans-serif', 'system-ui', sans-serif; 
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .rounded-xl-2 { border-radius: 1.25rem; }
+    .timeline-dot {
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+    .timeline-card {
+      box-shadow: 0 4px 16px 0 var(--shadow-color);
+      background-color: var(--timeline-bg);
+      border-color: var(--border-primary);
+    }
+    .animate-fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .animate-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gradient-btn {
+      background: linear-gradient(90deg, #003749 0%, #15768e 60%, #1de9b6 100%);
+    }
+    [data-theme="light"] .gradient-btn {
+      background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-indigo) 60%, var(--accent-teal) 100%);
+      color: white;
+      border: 2px solid var(--accent-blue);
+    }
+    [data-theme="light"] .gradient-btn:hover {
+      background: linear-gradient(90deg, var(--accent-indigo) 0%, var(--accent-purple) 60%, var(--accent-emerald) 100%);
+      border-color: var(--accent-indigo);
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px 0 rgba(30, 58, 138, 0.3);
+    }
+    .gradient-btn:hover {
+      filter: brightness(1.1);
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+    }
+    .btn-animate {
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-animate {
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+      background-color: var(--card-bg);
+    }
+    .card-animate:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 32px 0 var(--shadow-color);
+    }
+    .icon-pulse {
+      animation: iconPulse 1.8s infinite alternate;
+    }
+    @keyframes iconPulse {
+      0% { filter: drop-shadow(0 0 0 var(--gradient-end)); }
+      100% { filter: drop-shadow(0 0 16px var(--gradient-end)); }
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    @keyframes glowPulse {
+      0% {
+        filter: drop-shadow(0 0 8px var(--gradient-start)) drop-shadow(0 0 16px var(--gradient-end));
+      }
+      50% {
+        filter: drop-shadow(0 0 32px var(--gradient-start)) drop-shadow(0 0 64px var(--gradient-end));
+      }
+      100% {
+        filter: drop-shadow(0 0 8px var(--gradient-start)) drop-shadow(0 0 16px var(--gradient-end));
+      }
+    }
+    @keyframes zoomInLogo {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .glow-zoom-logo {
+      animation: glowPulse 2s infinite alternate, zoomInLogo 1.2s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .slide-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-in-success {
+      animation: fadeInSuccess 1s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes fadeInSuccess {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Typewriter animation */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 2s ease-in-out;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* Fade in text animation */
+    .fade-in-text {
+      opacity: 0;
+      animation: fadeInText 1s ease-in forwards;
+    }
+
+    .fade-in-text:nth-child(1) { animation-delay: 0.5s; }
+    .fade-in-text:nth-child(2) { animation-delay: 1s; }
+    .fade-in-text:nth-child(3) { animation-delay: 1.5s; }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating animation for subtitle */
+    .floating-text {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Gradient text animation */
+    .animated-gradient-text {
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Pulse animation for CTA button */
+    .pulse-button {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(29, 233, 182, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(29, 233, 182, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(29, 233, 182, 0); }
+    }
+
+    [data-theme="light"] .pulse-button {
+      animation: pulseLight 2s infinite;
+    }
+
+    @keyframes pulseLight {
+      0% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(30, 58, 138, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(30, 58, 138, 0); }
+    }
+
+    /* Theme toggle styles */
+    .theme-toggle {
+      background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* WhatsApp button styles */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      border: none;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .whatsapp-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+    }
+    
+    .whatsapp-button svg {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .whatsapp-button .pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(37, 211, 102, 0.3);
+      animation: whatsappPulse 2s infinite;
+    }
+    
+    @keyframes whatsappPulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+    
+    [data-theme="light"] .whatsapp-button {
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+    
+    [data-theme="light"] .whatsapp-button:hover {
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Section backgrounds */
+    .section-bg {
+      background-color: var(--bg-secondary);
+    }
+    .hero-bg {
+      background: radial-gradient(ellipse at center, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+    }
+    .input-field {
+      background-color: var(--input-bg);
+      border-color: var(--border-primary);
+      color: var(--text-primary);
+    }
+    .input-field:focus {
+      border-color: var(--border-secondary);
+    }
+  </style>
+</head>
+<body class="text-[var(--text-primary)]" data-theme="dark">
+  <div id="main-content" class="">
+  <!-- Navbar -->
+  <nav class="max-w-6xl mx-auto mt-4 mb-8 rounded-2xl section-bg px-6 py-3 flex items-center justify-between shadow-lg animate-fade-up">
+    <span class="text-2xl font-bold gradient-text">NEXRIFT</span>
+    <div class="flex items-center space-x-8">
+      <ul class="flex space-x-8 text-[var(--text-primary)] text-base font-normal">
+      <li><a href="#home" class="hover:underline">Home</a></li>
+      <li><a href="#about" class="hover:underline">About Us</a></li>
+      <li><a href="#services" class="hover:underline">Services</a></li>
+      <li><a href="#contact" class="hover:underline">Contact Us</a></li>
+    </ul>
+      <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
+        <svg id="sun-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <svg id="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative flex flex-col items-center justify-center min-h-[60vh] rounded-xl-2 max-w-6xl mx-auto overflow-hidden mb-12 animate-fade-up hero-bg">
+    <div class="absolute inset-0 bg-[var(--bg-primary)] opacity-80"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center py-20 px-4">
+      <h1 class="text-4xl md:text-6xl font-bold text-center mb-6 gradient-text typewriter">Building Next-Gen Tech Solutions</h1>
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] text-center mb-8 max-w-2xl">NexRIFT is a forward-thinking technology services startup dedicated to crafting innovative solutions that propel businesses into the future.</p>
+      <a href="#contact" class="gradient-btn btn-animate text-white font-medium px-6 py-2 rounded-md text-lg shadow transition">Get Started</a>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="max-w-5xl mx-auto py-16 px-4 animate-fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 gradient-text animate-fade-up">About Us</h2>
+    <p class="text-center text-[var(--text-secondary)] max-w-3xl mx-auto mb-12 text-base md:text-lg animate-fade-up">
+      At NexRIFT, our mission is to empower businesses with cutting-edge technology solutions that drive growth and efficiency. We envision a future where technology seamlessly integrates with business operations, enhancing productivity and fostering innovation. Our journey began with a shared passion for technology and a commitment to delivering exceptional service, evolving into a trusted partner for businesses seeking to leverage technology for competitive advantage.
+    </p>
+    <!-- Timeline -->
+    <div class="relative flex flex-col md:flex-row md:justify-center md:items-start animate-fade-up">
+      <div class="hidden md:block w-1 bg-gradient-to-b from-[var(--gradient-start)] to-[var(--gradient-end)] absolute left-1/2 top-0 bottom-0 -translate-x-1/2" style="z-index:0;"></div>
+      <div class="flex flex-col space-y-12 w-full md:w-1/2 md:pr-8">
+        <div class="relative md:pr-8 slide-in-left">
+          <div class="timeline-card rounded-xl p-6 mb-2 shadow-md border-l-4">
+            <div class="font-bold text-lg mb-1 gradient-text">2018: Founded NexRIFT</div>
+            <div class="text-[var(--text-secondary)] text-base">Established our foundation with a focus on innovative tech solutions.</div>
+          </div>
+          <div class="absolute md:right-[-32px] md:top-8 left-0 md:left-auto top-0 flex items-center justify-center">
+            <div class="timeline-dot w-6 h-6 bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full border-4 border-[var(--bg-secondary)]"></div>
+          </div>
+        </div>
+        <div class="relative md:pr-8 mt-12 md:mt-0 slide-in-left" style="transition-delay: 0.15s;">
+          <div class="timeline-card rounded-xl p-6 mb-2 shadow-md border-l-4 md:ml-auto md:border-l-0 md:border-r-4">
+            <div class="font-bold text-lg mb-1 gradient-text">2023: Achieved Industry Recognition</div>
+            <div class="text-[var(--text-secondary)] text-base">Recognized for excellence in delivering transformative technology services.</div>
+          </div>
+          <div class="absolute md:right-[-32px] md:top-8 left-0 md:left-auto top-0 flex items-center justify-center">
+            <div class="timeline-dot w-6 h-6 bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full border-4 border-[var(--bg-secondary)]"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col space-y-12 w-full md:w-1/2 md:pl-8 mt-12 md:mt-0">
+        <div class="relative md:pl-8 slide-in-right" style="transition-delay: 0.3s;">
+          <div class="timeline-card rounded-xl p-6 mb-2 shadow-md border-r-4 md:ml-auto">
+            <div class="font-bold text-lg mb-1 gradient-text">2020: Expanded Service Offerings</div>
+            <div class="text-[var(--text-secondary)] text-base">Broadened our expertise to include AI, cloud computing, and cybersecurity.</div>
+          </div>
+          <div class="absolute md:left-[-32px] md:top-8 right-0 md:right-auto top-0 flex items-center justify-center">
+            <div class="timeline-dot w-6 h-6 bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full border-4 border-[var(--bg-secondary)]"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 section-bg animate-fade-up">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 gradient-text animate-fade-up">Our Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
+          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+            <defs>
+              <linearGradient id="icon-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--gradient-start)"/>
+                <stop offset="100%" stop-color="var(--gradient-end)"/>
+              </linearGradient>
+            </defs>
+            <circle cx="24" cy="40" r="16"/>
+            <rect x="32" y="16" width="16" height="16" rx="2"/>
+          </svg>
+          <div class="font-bold text-xl mb-2 text-center gradient-text">AI Solutions</div>
+          <div class="text-[var(--text-secondary)] text-center">Harness the power of artificial intelligence to automate processes, gain insights, and drive innovation.</div>
+        </div>
+        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
+          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient2)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+            <defs>
+              <linearGradient id="icon-gradient2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--gradient-start)"/>
+                <stop offset="100%" stop-color="var(--gradient-end)"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 48c0-8.837 7.163-16 16-16s16 7.163 16 16"/>
+            <path d="M32 32V16a8 8 0 1 1 16 0v8"/>
+          </svg>
+          <div class="font-bold text-xl mb-2 text-center gradient-text">Cloud Computing</div>
+          <div class="text-[var(--text-secondary)] text-center">Migrate to the cloud for enhanced scalability, security, and cost-effectiveness.</div>
+        </div>
+        <div class="card-animate rounded-xl shadow-md p-8 flex flex-col items-center animate-fade-up">
+          <svg width="80" height="80" fill="none" stroke="url(#icon-gradient3)" stroke-width="8" viewBox="0 0 64 64" class="mb-4 icon-pulse">
+            <defs>
+              <linearGradient id="icon-gradient3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--gradient-start)"/>
+                <stop offset="100%" stop-color="var(--gradient-end)"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 56c13.255 0 24-10.745 24-24S45.255 8 32 8 8 18.745 8 32s10.745 24 24 24z"/>
+            <path d="M24 32l8 8 8-12"/>
+          </svg>
+          <div class="font-bold text-xl mb-2 text-center gradient-text">Cybersecurity</div>
+          <div class="text-[var(--text-secondary)] text-center">Protect your business from cyber threats with our comprehensive security solutions.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact" class="py-16 section-bg animate-fade-up">
+    <div class="max-w-2xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 gradient-text animate-fade-up">Contact Us</h2>
+      <div class="card-animate rounded-xl shadow-md p-8 animate-fade-up">
+        <form class="space-y-6">
+          <div class="animate-fade-up">
+            <label for="name" class="block text-[var(--text-secondary)] font-semibold mb-1">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-4 py-3 rounded-md border input-field focus:outline-none"/>
+          </div>
+          <div class="animate-fade-up">
+            <label for="email" class="block text-[var(--text-secondary)] font-semibold mb-1">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com" class="w-full px-4 py-3 rounded-md border input-field focus:outline-none"/>
+          </div>
+          <div class="animate-fade-up">
+            <label for="message" class="block text-[var(--text-secondary)] font-semibold mb-1">Your Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="How can we help you?" class="w-full px-4 py-3 rounded-md border input-field focus:outline-none"></textarea>
+          </div>
+          <button type="submit" class="gradient-btn btn-animate text-white font-medium px-6 py-2 rounded-md shadow transition animate-fade-up">Submit</button>
+          <div id="contact-success" class="hidden text-[var(--gradient-end)] text-center mt-4">Thank you for reaching out! We'll get back to you soon.</div>
+          <div id="contact-error" class="hidden text-red-400 text-center mt-4"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section-bg text-[var(--text-primary)] mt-12 py-8 animate-fade-up">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center space-x-4 mb-4 md:mb-0">
+        <span class="text-2xl font-bold gradient-text">NEXRIFT</span>
+        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2" /><rect width="6" height="6" x="9" y="2" rx="1"/></svg></a>
+        <a href="#" class="text-[var(--text-primary)] hover:text-[var(--gradient-start)] text-xl"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1-12 0" /><circle cx="12" cy="12" r="10"/></svg></a>
+      </div>
+      <div class="flex space-x-8 text-[var(--text-muted)] text-sm">
+        <a href="#" class="hover:text-[var(--text-primary)]">Privacy Policy</a>
+        <a href="#" class="hover:text-[var(--text-primary)]">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+  </div>
+  
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/923222883752?text=Hi%20I%20want%20to%20know%20more%20about%20you" target="_blank" class="whatsapp-button" title="Chat with us on WhatsApp">
+    <div class="pulse"></div>
+    <svg fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+    </svg>
+  </a>
+  
+  <script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+      const body = document.body;
+      
+      // Check for saved theme preference or default to dark
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      body.setAttribute('data-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+      
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+      
+      function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+        } else {
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+        }
+      }
+    });
+
+    // Intersection Observer for fade-up and slide-in animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.animate-fade-up, .slide-in-left, .slide-in-right').forEach(el => {
+        observer.observe(el);
+      });
+    });
+    // Contact form AJAX submit and thank you message
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      if (!form) return;
+      const successDiv = document.getElementById('contact-success');
+      const errorDiv = document.getElementById('contact-error');
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = form.name.value;
+        const email = form.email.value;
+        const message = form.message.value;
+        successDiv.classList.add('hidden');
+        errorDiv.classList.add('hidden');
+        try {
+          const res = await fetch('/api/contact/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ name, email, message })
+          });
+          if (res.ok) {
+            successDiv.classList.remove('hidden');
+            form.reset();
+            // Scroll to contact section and animate thank you
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              successDiv.classList.add('fade-in-success');
+              setTimeout(() => successDiv.classList.remove('fade-in-success'), 1200);
+            }
+          } else {
+            const data = await res.json();
+            errorDiv.textContent = data.detail || 'Submission failed.';
+            errorDiv.classList.remove('hidden');
+          }
+        } catch (err) {
+          errorDiv.textContent = 'Network error. Please try again.';
+          errorDiv.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html> 
